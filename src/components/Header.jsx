@@ -3,6 +3,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import LOGO from "../assets/lms.png";
 import { Link } from "react-router-dom";
+import { MdAddHomeWork } from "react-icons/md";
+import { RiLoginBoxFill } from "react-icons/ri";
+import { FaUserPlus } from "react-icons/fa";
 
 const Header = () => {
   return (
@@ -19,12 +22,14 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Link className="nav-link" to="/">
-              Home
+              <MdAddHomeWork /> Home
             </Link>
             <Link className="nav-link" to="signin">
+              <RiLoginBoxFill />
               Login
             </Link>
             <Link className="nav-link" to="signup">
+              <FaUserPlus />
               Register
             </Link>
           </Nav>
