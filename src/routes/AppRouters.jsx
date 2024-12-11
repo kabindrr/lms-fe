@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "../pages/home/HomePage";
-import { DashboardPage } from "../pages/dashboard/DashboardPage";
-import { DefaultLayout } from "../components/layouts/DefaultLayout";
+
+import { DefaultLayout } from "@components/layouts/DefaultLayout";
 import { SignInPage } from "../pages/auth/SignInPage";
 import { SignUpPage } from "../pages/auth/SignUpPage";
 import { ForgetPasswordPage } from "../pages/auth/ForgetPasswordPage";
-import { UserLayout } from "../components/layouts/UserLayout";
+import { UserLayout } from "@components/layouts/UserLayout";
 import { Books } from "../pages/books/Books";
 import { UserPage } from "../pages/users/UserPage";
 import { Borrow } from "../pages/borrow/Borrow";
