@@ -3,15 +3,22 @@ import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/customInpute/CustomInput";
 import { signUpInputes } from "../../assets/customInputes/userSignUpInputes";
 import useForm from "../../hooks/useForm";
+import { signUpNewUserApi } from "../../services/authApi";
 
 const initialState = {};
 export const SignUpPage = () => {
   const { form, setForm, handleOnChange } = useForm(initialState);
-  console.log(form);
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+
+    const { confirmPassword, ...rest } = form;
+    if (confirmPassword !== rest.password) {
+      return alert("Password do not match");
+    }
+
+    const result = await signUpNewUserApi(form);
+    console.log(result);
   };
 
   return (
