@@ -7,7 +7,8 @@ import { signUpNewUserApi } from "../../services/authApi";
 
 const initialState = {};
 export const SignUpPage = () => {
-  const { form, setForm, handleOnChange } = useForm(initialState);
+  const { form, setForm, handleOnChange, passwordErrors } =
+    useForm(initialState);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -36,8 +37,18 @@ export const SignUpPage = () => {
             onChange={handleOnChange}
           />
         ))}
+        <div className="py-3">
+          <ul className="text-danger">
+            {passwordErrors.length > 0 &&
+              passwordErrors.map((msg) => <li key={msg}>{msg}</li>)}
+          </ul>
+        </div>
 
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={passwordErrors.length}
+        >
           Submit
         </Button>
       </Form>
