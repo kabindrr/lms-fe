@@ -8,6 +8,7 @@ export const signUpNewUserApi = (payload) => {
     url: authApiEP + "/register",
     method: "post",
     payload,
+    showToast: true,
   };
   const result = apiProcessor(axiosObj);
 };
