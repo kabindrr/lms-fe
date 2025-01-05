@@ -10,5 +10,5 @@ export const signUpNewUserApi = (payload) => {
     payload,
     showToast: true,
   };
-  const result = apiProcessor(axiosObj);
+  return apiProcessor(axiosObj);
 };

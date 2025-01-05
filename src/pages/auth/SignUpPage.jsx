@@ -4,8 +4,16 @@ import { CustomInput } from "../../components/customInpute/CustomInput";
 import { signUpInputes } from "../../assets/customInputes/userSignUpInputes";
 import useForm from "../../hooks/useForm";
 import { signUpNewUserApi } from "../../services/authApi";
+import { toast } from "react-toastify";
 
-const initialState = {};
+const initialState = {
+  fName: "",
+  lName: "",
+  phone: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 export const SignUpPage = () => {
   const { form, setForm, handleOnChange, passwordErrors } =
     useForm(initialState);
@@ -18,8 +26,12 @@ export const SignUpPage = () => {
       return alert("Password do not match");
     }
 
-    const result = await signUpNewUserApi(form);
-    console.log(result);
+    const result = await signUpNewUserApi(rest);
+
+    if (result?.status === "success") {
+      setForm(initialState);
+      toast.success("Form submitted successfully");
+    }
   };
 
   return (
@@ -34,6 +46,7 @@ export const SignUpPage = () => {
           <CustomInput
             key={inpute.name}
             {...inpute}
+            value={form[inpute.name] || ""}
             onChange={handleOnChange}
           />
         ))}
