@@ -22,6 +22,12 @@ export const apiProcessor = async ({ url, method, payload, showToast }) => {
     return data;
   } catch (error) {
     const msg = error?.response?.data?.message || error.message;
-    toast.error(msg);
+
+    showToast && toast.error(msg);
+
+    return {
+      status: "error",
+      message: msg,
+    };
   }
 };

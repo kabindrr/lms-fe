@@ -12,3 +12,11 @@ export const signUpNewUserApi = (payload) => {
   };
   return apiProcessor(axiosObj);
 };
+export const activateNewUserApi = (payload) => {
+  const axiosObj = {
+    url: authApiEP + "/activate-user",
+    method: "post",
+    payload,
+  };
+  return apiProcessor(axiosObj);
+};
