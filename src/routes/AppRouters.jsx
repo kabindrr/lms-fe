@@ -15,6 +15,7 @@ import { ReviewsPage } from "../pages/reviews/ReviewsPage";
 import { EditBookPage } from "../pages/books/EditBookPage";
 import { NewBookPage } from "../pages/books/NewBookPage";
 import { BookLandingPage } from "../pages/books/BookLandingPage";
+import { VerifyUser } from "../pages/auth/VerifyUser";
 
 export const AppRouters = () => {
   return (
@@ -27,6 +28,7 @@ export const AppRouters = () => {
           <Route path="signin" element={<SignInPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="forgot-password" element={<ForgetPasswordPage />} />
+          <Route path="activate-user" element={<VerifyUser />} />
         </Route>
         {/* private Pages */}
         <Route path="/user" element={<UserLayout />}>
