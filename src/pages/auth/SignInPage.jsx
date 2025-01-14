@@ -4,6 +4,7 @@ import { Card, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/customInpute/CustomInput";
 import useForm from "../../hooks/useForm";
 import { signInUserApi } from "../../services/authApi";
+import { fetchUserAPI } from "../../features/user/userAPI";
 
 const initialState = {};
 
@@ -15,10 +16,16 @@ export const SignInPage = () => {
     e.preventDefault();
     if (form.email && form.password) {
       const { payload } = await signInUserApi(form);
-      console.log(payload);
 
-      sessionStorage.setItem("accessJWT", payload.accessJWT);
-      localStorage.setItem("refreshJWT", payload.refreshJWT);
+      if (payload?.accessJWT) {
+        sessionStorage.setItem("accessJWT", payload.accessJWT);
+        localStorage.setItem("refreshJWT", payload.refreshJWT);
+        console.log(10000, payload);
+
+        //call api to get user profile
+        const userInfo = await fetchUserAPI();
+        console.log(userInfo);
+      }
 
       //get user and redirect to userprofile
     } else {
