@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { Card, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/customInpute/CustomInput";
 import useForm from "../../hooks/useForm";
 import { signInUserApi } from "../../services/authApi";
-import { fetchUserAPI } from "../../features/user/userAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserAction } from "../../features/user/userAction";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {};
 
 export const SignInPage = () => {
   const { form, setForm, handleOnChange, passwordErrors } =
     useForm(initialState);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.userInfo);
+  useEffect(() => {
+    user?._id && navigate("/user");
+  }, [user?._id, navigate]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +32,7 @@ export const SignInPage = () => {
         localStorage.setItem("refreshJWT", payload.refreshJWT);
         console.log(10000, payload);
 
-        //call api to get user profile
-        const userInfo = await fetchUserAPI();
-        console.log(userInfo);
+        dispatch(fetchUserAction());
       }
 
       //get user and redirect to userprofile
