@@ -35,7 +35,7 @@ export const SignUpPage = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex justify-content-center signUpPage">
       <Form
         style={{ width: "450px" }}
         className="card p-3 mt-5 shadow-lg mb-5"
