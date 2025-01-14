@@ -1,3 +1,11 @@
 .main {
   min-height: 80vh;
 }
+
+/* sign in page */
+
+.SignInPage {
+  min-height: 100vh;
+  background: url(./assets/image2.jpg) center no-repeat;
+  background-size: cover;
+}
