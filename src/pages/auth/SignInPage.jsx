@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import { Card, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/customInpute/CustomInput";
 import useForm from "../../hooks/useForm";
+import { signInUserApi } from "../../services/authApi";
 
 const initialState = {};
 
@@ -10,9 +11,19 @@ export const SignInPage = () => {
   const { form, setForm, handleOnChange, passwordErrors } =
     useForm(initialState);
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+    if (form.email && form.password) {
+      const { payload } = await signInUserApi(form);
+      console.log(payload);
+
+      sessionStorage.setItem("accessJWT", payload.accessJWT);
+      localStorage.setItem("refreshJWT", payload.refreshJWT);
+
+      //get user and redirect to userprofile
+    } else {
+      alert("Please enter email and password");
+    }
   };
 
   return (

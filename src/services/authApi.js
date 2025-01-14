@@ -20,3 +20,13 @@ export const activateNewUserApi = (payload) => {
   };
   return apiProcessor(axiosObj);
 };
+
+export const signInUserApi = (payload) => {
+  const axiosObj = {
+    url: authApiEP + "/login",
+    method: "post",
+    payload,
+    showToast: true,
+  };
+  return apiProcessor(axiosObj);
+};
