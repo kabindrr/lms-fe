@@ -30,3 +30,13 @@ export const signInUserApi = (payload) => {
   };
   return apiProcessor(axiosObj);
 };
+
+export const fetchNewAccessJWTapi = async () => {
+  const axiosObj = {
+    url: authApiEP + "/renew-access-JWT",
+    method: "get",
+    isPrivate: true,
+    isRefreshJWT: true,
+  };
+  return apiProcessor(axiosObj);
+};

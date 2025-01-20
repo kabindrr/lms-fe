@@ -14,11 +14,14 @@ export const apiProcessor = async ({
   payload,
   showToast,
   isPrivate,
+  isRefreshJWT,
 }) => {
   try {
     const headers = {};
+
     if (isPrivate) {
-      headers.authorization = "bearer " + getAccessJWT();
+      const token = isRefreshJWT ? getRefreshJWT() : getAccessJWT();
+      headers.authorization = "bearer " + token;
     }
 
     const responsePending = axios({
