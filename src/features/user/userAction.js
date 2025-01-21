@@ -20,7 +20,7 @@ export const autoLoginUser = () => async (dispatch) => {
     return;
   }
 
-  const refreshJWT = sessionStorage.getItem("refreshJWT");
+  const refreshJWT = localStorage.getItem("refreshJWT");
   if (refreshJWT) {
     //fetch accessJWT and set in the session storage
     const { payload } = await fetchNewAccessJWTapi();
