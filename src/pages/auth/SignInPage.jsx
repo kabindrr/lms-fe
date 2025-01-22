@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import { Card, Form } from "react-bootstrap";
+import { Card, Form, Spinner } from "react-bootstrap";
 import { CustomInput } from "../../components/customInpute/CustomInput";
 import useForm from "../../hooks/useForm";
 import { signInUserApi } from "../../services/authApi";
 import { useDispatch, useSelector } from "react-redux";
 import { autoLoginUser, fetchUserAction } from "../../features/user/userAction";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 const initialState = {};
 
@@ -16,10 +17,22 @@ export const SignInPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const showLoderRef = useRef(true);
 
   const { user } = useSelector((state) => state.userInfo);
   useEffect(() => {
     user?._id ? navigate("/user") : dispatch(autoLoginUser());
+
+    if (
+      sessionStorage.getItem("accessJWT") ||
+      localStorage.getItem("refreshJWT")
+    ) {
+      setTimeout(() => {
+        showLoderRef.current = false;
+      }, 2000);
+    } else {
+      showLoderRef.current = false;
+    }
   }, [user?._id, navigate, autoLoginUser]);
 
   const handleOnSubmit = async (e) => {
@@ -40,6 +53,13 @@ export const SignInPage = () => {
       alert("Please enter email and password");
     }
   };
+  if (showLoderRef.current) {
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <Spinner animation="border" />;
+      </div>
+    );
+  }
 
   return (
     <div className="SignInPage d-flex justify-content-center align-items-center">
