@@ -1,6 +1,6 @@
 import { apiProcessor } from "./axiosHelper";
 
-const apiBaseURL = "http://localhost:3000";
+const apiBaseURL = import.meta.env.VITE_ROOT_URL;
 const authApiEP = apiBaseURL + "/api/v1/auth";
 
 export const signUpNewUserApi = (payload) => {
