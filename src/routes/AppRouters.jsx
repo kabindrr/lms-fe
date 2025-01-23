@@ -10,7 +10,7 @@ import { UserLayout } from "@components/layouts/UserLayout";
 import { Books } from "../pages/books/Books";
 import { UserPage } from "../pages/users/UserPage";
 import { Borrow } from "../pages/borrow/Borrow";
-import { Profile } from "../pages/profile/profile";
+import { Profile } from "../pages/profile/Profile";
 import { ReviewsPage } from "../pages/reviews/ReviewsPage";
 import { EditBookPage } from "../pages/books/EditBookPage";
 import { NewBookPage } from "../pages/books/NewBookPage";
