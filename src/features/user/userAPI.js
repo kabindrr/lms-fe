@@ -1,6 +1,6 @@
 import { apiProcessor } from "../../services/axiosHelper";
 
-const apiBaseUrl = "http://localhost:3000";
+const apiBaseUrl = import.meta.env.VITE_ROOT_URL;
 const userApiEP = apiBaseUrl + "/api/v1/users";
 //call api processor to fetch user
 
