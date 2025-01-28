@@ -40,3 +40,12 @@ export const fetchNewAccessJWTapi = async () => {
   };
   return apiProcessor(axiosObj);
 };
+
+export const logoutUserApi = async () => {
+  const axiosObj = {
+    url: authApiEP + "/logout",
+    method: "get",
+    isPrivate: true,
+  };
+  return apiProcessor(axiosObj);
+};

@@ -6,12 +6,29 @@ import { Link } from "react-router-dom";
 import { MdAddHomeWork } from "react-icons/md";
 import { RiLoginBoxFill } from "react-icons/ri";
 import { FaUserPlus } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CiLogout } from "react-icons/ci";
 import { RxDashboard } from "react-icons/rx";
+import { logoutUserApi } from "../services/authApi";
+import { setUser } from "../features/user/userSlice";
 
 const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+
+  const handleOnLogout = () => {
+    //call api to logout from backend
+    logoutUserApi();
+
+    
+    //logout from frontend
+
+    sessionStorage.removeItem("accessJWT");
+    localStorage.removeItem("accessJWT");
+    dispatch(setUser({}));
+
+  };
+
   return (
     <Navbar expand="lg" className="bg-dark" variant="dark">
       <Container>
@@ -35,7 +52,7 @@ const Header = () => {
                   <RxDashboard />
                   Dashboard
                 </Link>
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/" onClick={handleOnLogout}>
                   <CiLogout />
                   Logout
                 </Link>
