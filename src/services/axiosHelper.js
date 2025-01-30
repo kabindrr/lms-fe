@@ -2,12 +2,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { fetchNewAccessJWTapi } from "./authApi";
 
-const getAccessJWT = () => {
-  return sessionStorage.getItem("accessJWT");
-};
-const getRefreshJWT = () => {
-  return localStorage.getItem("refreshJWT");
-};
+const getAccessJWT = () => sessionStorage.getItem("accessJWT");
+const getRefreshJWT = () => localStorage.getItem("refreshJWT");
 
 export const apiProcessor = async ({
   url,
@@ -22,6 +18,9 @@ export const apiProcessor = async ({
 
     if (isPrivate) {
       const token = isRefreshJWT ? getRefreshJWT() : getAccessJWT();
+      if (!token) {
+        throw new Error("No access token found. Please log in.");
+      }
       headers.authorization = "bearer " + token;
     }
 
@@ -32,26 +31,31 @@ export const apiProcessor = async ({
       headers,
     });
 
-    //show toast message
     if (showToast) {
-      toast.promise(responsePending, {
-        pending: "Please Wait",
-      });
+      toast.promise(responsePending, { pending: "Please Wait" });
     }
+
     const { data } = await responsePending;
     showToast && toast[data.status](data.message);
     return data;
   } catch (error) {
-    console.log(error);
+    console.error("API Error:", error);
+
     const msg = error?.response?.data?.message || error.message;
+    const status = error.response?.status;
 
     showToast && toast.error(msg);
-    if (error.status === 401 && msg === "jwt expired") {
-      //call api to get new accessJWT
+
+    // Handle expired JWT case
+    if (status === 401 && msg === "jwt expired") {
+      console.log("Access token expired. Trying to refresh...");
       const { payload } = await fetchNewAccessJWTapi();
+
       if (payload) {
         sessionStorage.setItem("accessJWT", payload);
-        //call the apiprocessor
+        console.log("New access token received. Retrying request...");
+
+        // Retry the API call with new token
         return apiProcessor({
           url,
           method,
@@ -60,15 +64,26 @@ export const apiProcessor = async ({
           isPrivate,
           isRefreshJWT,
         });
+      } else {
+        console.log("Refresh token expired or invalid. Logging out...");
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.href = "/signin"; // Redirect to login page
+        return {
+          status: "error",
+          message: "Session expired. Please log in again.",
+        };
       }
-    } else {
-      sessionStorage.removeItem("accessJWT");
-      localStorage.removeItem("refreshJWT");
     }
 
-    return {
-      status: "error",
-      message: msg,
-    };
+    // If other errors, clear storage and redirect
+    if (status === 401 || status === 403) {
+      console.log("Unauthorized request. Logging out...");
+      sessionStorage.clear();
+      localStorage.clear();
+      window.location.href = "/signin";
+    }
+
+    return { status: "error", message: msg };
   }
 };

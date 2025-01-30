@@ -17,8 +17,6 @@ const useForm = (initialState) => {
     setPasswordErrors(errorArg);
   }, [form.password, form.confirmPassword]);
 
-  console.log(10000, passwordErrors);
-
   return {
     form,
     setForm,
