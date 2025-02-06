@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Alert, Button, Card, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/customInpute/CustomInput";
 import useForm from "../../hooks/useForm";
+import { requestPasswordResetOTPApi } from "../../services/authApi";
 const initialState = {};
 export const ForgetPasswordPage = () => {
   const [showPassResetForm, setShowPassResetForm] = useState(false);
@@ -9,14 +10,19 @@ export const ForgetPasswordPage = () => {
   const { form, setForm, handleOnChange, passwordErrors } =
     useForm(initialState);
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form.email);
+    //call api
+    const email = form.email;
+    const response = await requestPasswordResetOTPApi({ email });
+
+    if (response?.status === "success") {
+      setShowPassResetForm(true);
+    }
   };
 
-  const handleOnPasswordResetSubmit = (e) => {
+  const handleOnPasswordResetSubmit = async (e) => {
     e.preventDefault();
-    console.log(form.otp, form.password);
   };
 
   return (
