@@ -16,6 +16,7 @@ import { EditBookPage } from "../pages/books/EditBookPage";
 import { NewBookPage } from "../pages/books/NewBookPage";
 import { BookLandingPage } from "../pages/books/BookLandingPage";
 import { VerifyUser } from "../pages/auth/VerifyUser";
+import { NewBook } from "../pages/books/NewBook";
 
 export const AppRouters = () => {
   return (
@@ -34,6 +35,7 @@ export const AppRouters = () => {
         <Route path="/user" element={<UserLayout />}>
           <Route path="user-list" element={<UserPage />} />
           <Route path="books" element={<Books />} />
+          <Route path="new-books" element={<NewBook />} />
           <Route path="edit-book" element={<EditBookPage />} />
           <Route path="new-book" element={<NewBookPage />} />
           <Route path="book-landing" element={<BookLandingPage />} />
