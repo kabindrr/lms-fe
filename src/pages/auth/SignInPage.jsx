@@ -6,7 +6,7 @@ import useForm from "../../hooks/useForm";
 import { signInUserApi } from "../../services/authApi";
 import { useDispatch, useSelector } from "react-redux";
 import { autoLoginUser, fetchUserAction } from "../../features/user/userAction";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
 const initialState = {};
@@ -18,10 +18,14 @@ export const SignInPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const showLoderRef = useRef(true);
+  const location = useLocation();
+  console.log(location);
+  const path = location?.state?.from ?? "/user";
 
   const { user } = useSelector((state) => state.userInfo);
+
   useEffect(() => {
-    user?._id ? navigate("/user") : dispatch(autoLoginUser());
+    user?._id ? navigate(path) : dispatch(autoLoginUser());
 
     if (
       sessionStorage.getItem("accessJWT") ||
