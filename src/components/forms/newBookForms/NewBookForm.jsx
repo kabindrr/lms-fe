@@ -3,14 +3,18 @@ import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../customInpute/CustomInput";
 import { NewBookInputes } from "../../../assets/customInputes/BookInputes";
 import useForm from "../../../hooks/useForm";
+import { postNewBookAction } from "../../../features/book/bookAction";
 
 const initialState = {};
 const NewBookForm = () => {
   const { form, setForm, handleOnChange } = useForm(initialState);
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     console.log(form);
+
+    const response = await postNewBookAction(form);
+    console.log(response);
   };
   return (
     <div className="p-4">
