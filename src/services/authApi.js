@@ -49,3 +49,23 @@ export const logoutUserApi = async () => {
   };
   return apiProcessor(axiosObj);
 };
+export const requestPasswordResetOTPApi = async (payload) => {
+  const axiosObj = {
+    url: authApiEP + "/otp",
+    method: "post",
+    payload,
+  };
+  return apiProcessor(axiosObj);
+};
+
+//reset password
+export const resetPasswordApi = async (payload) => {
+  console.log(payload);
+  const axiosObj = {
+    url: authApiEP + "/reset-password",
+    method: "post",
+    payload,
+    showToast: true,
+  };
+  return apiProcessor(axiosObj);
+};

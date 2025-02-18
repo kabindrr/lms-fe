@@ -12,25 +12,23 @@ export const UserLayout = () => {
       {/* navbar */}
       <Header />
 
-      <Container fluid>
-        <Row>
-          <Col md={3} xl={2} className="bg-dark text-white">
+      <div>
+        <div className="d-flex">
+          <div className="bg-dark text-white p-3" style={{ width: "200px" }}>
             <div className="p-3">
               <div>Welcome Back</div>
               <h4>Kabindra Ranabhat</h4>
             </div>
             <hr />
             <SideBar />
-          </Col>
-          <Col md={9} xl={10}>
-            {" "}
-            {/* main body */}
-            <main className="main">
-              <Outlet />
-            </main>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+
+          {/* main body */}
+          <main className="user-main">
+            <Outlet />
+          </main>
+        </div>
+      </div>
 
       {/* Footer */}
       <Footer />
