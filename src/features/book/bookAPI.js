@@ -14,3 +14,13 @@ export const postNewBookApi = async (payload) => {
   const result = await apiProcessor(obj);
   return result;
 };
+export const adminFetchAllBook = async () => {
+  const obj = {
+    url: bookApiEp + "/admin",
+    method: "get",
+    showToast: false,
+    isPrivate: true,
+  };
+  const result = await apiProcessor(obj);
+  return result;
+};
