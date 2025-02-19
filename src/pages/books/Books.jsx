@@ -2,28 +2,28 @@ import { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { BookTable } from "../../components/tables/BookTable";
 import { adminFetchAllBookAction } from "../../features/book/bookAction";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const Books = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    adminFetchAllBookAction();
-  }, []);
+    dispatch(adminFetchAllBookAction());
+  }, [dispatch]);
   return (
     <div className="p-3">
       <h3>Books</h3>
       <hr />
       <div className="text-end">
-        <Button>Add New Book</Button>
+        <Link to="/user/new-book">
+          {" "}
+          <Button>Add New Book</Button>
+        </Link>
       </div>
 
       <div className="mt-4">
-        <div className="d-flex justify-content-between mb-4 ">
-          <div>10 Book (s) found!</div>
-          <div>
-            <Form.Control placeholder="Search Book By Name" />
-          </div>
-        </div>
+        <BookTable />
       </div>
-      <BookTable />
     </div>
   );
 };
