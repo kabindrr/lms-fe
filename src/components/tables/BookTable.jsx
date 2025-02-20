@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export const BookTable = () => {
   const { books } = useSelector((state) => state.bookInfo);
-  console.log(books);
+ 
 
   const [displayBook, setDisplayBook] = useState([]);
 
@@ -59,7 +59,7 @@ export const BookTable = () => {
               <td>{title}</td>
               <td>YES, NO:available Date</td>
               <td>
-                <Link to="/user/edit-book">
+                <Link to={"/user/edit-book/" + _id}>
                   <Button variant="warning">Edit</Button>
                 </Link>
               </td>

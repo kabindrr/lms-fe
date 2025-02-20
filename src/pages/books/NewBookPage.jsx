@@ -1,6 +1,6 @@
 import React from "react";
 import NewBookForm from "../../components/forms/newBookForms/NewBookForm";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 export const NewBookPage = () => {
