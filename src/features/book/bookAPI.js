@@ -24,3 +24,14 @@ export const adminFetchAllBook = async () => {
   const result = await apiProcessor(obj);
   return result;
 };
+export const updateBookApi = async (payload) => {
+  const obj = {
+    url: bookApiEp,
+    method: "put",
+    showToast: true,
+    isPrivate: true,
+    payload,
+  };
+  const result = await apiProcessor(obj);
+  return result;
+};

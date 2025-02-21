@@ -6,6 +6,7 @@ import { postNewBookAction } from "../../../features/book/bookAction";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { updateBookApi } from "../../../features/book/bookAPI";
 
 const initialState = {};
 const EditBookForm = () => {
@@ -39,7 +40,8 @@ const EditBookForm = () => {
       available,
       ...rest
     } = form;
-    console.log(rest);
+    const response = await updateBookApi(rest);
+    console.log(response);
   };
 
   return (
@@ -54,6 +56,7 @@ const EditBookForm = () => {
             id="custom-switch"
             label={(form.status || "inactive").toUpperCase()}
             onChange={handleOnChange}
+            checked={form.status === "active"}
           />
         </Form.Group>
         {EditBookInputes.map((inpute) => (

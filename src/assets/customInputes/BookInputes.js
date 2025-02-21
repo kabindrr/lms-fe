@@ -116,7 +116,7 @@ export const EditBookInputes = [
   },
   {
     label: "Expected Available Date",
-    name: "expectedAvailableDate",
+    name: "expectedAvailable",
     type: "date",
   },
   {
