@@ -81,9 +81,7 @@ const EditBookForm = () => {
           </div>
         </div>
         <div className="d-grid">
-          <Button variant="danger" type="submit">
-            Submit Changes
-          </Button>
+          <Button type="submit">Submit Changes</Button>
         </div>
       </Form>
     </div>

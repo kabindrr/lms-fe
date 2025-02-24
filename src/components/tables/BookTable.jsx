@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 export const BookTable = () => {
   const { books } = useSelector((state) => state.bookInfo);
- 
 
   const [displayBook, setDisplayBook] = useState([]);
 
@@ -45,26 +44,39 @@ export const BookTable = () => {
           </tr>
         </thead>
         <tbody>
-          {displayBook.map(({ _id, status, title, available, imgUrl }, i) => (
-            <tr key={_id}>
-              <td>{i + 1}</td>
-              <td
-                className={status === "active" ? "text-success" : "text-danger"}
-              >
-                {status}
-              </td>
-              <td>
-                <img src={imgUrl} alt="" width="60px" />
-              </td>
-              <td>{title}</td>
-              <td>YES, NO:available Date</td>
-              <td>
-                <Link to={"/user/edit-book/" + _id}>
-                  <Button variant="warning">Edit</Button>
-                </Link>
-              </td>
-            </tr>
-          ))}
+          {displayBook.map(
+            (
+              { _id, status, title, available, imgUrl, expectedAvailable },
+              i
+            ) => (
+              <tr key={_id}>
+                <td>{i + 1}</td>
+                <td
+                  className={
+                    status === "active" ? "text-success" : "text-danger"
+                  }
+                >
+                  {status}
+                </td>
+                <td>
+                  <img src={imgUrl} alt="" width="60px" />
+                </td>
+                <td>{title}</td>
+                <td>
+                  {available
+                    ? "Yes"
+                    : !available && expectedAvailable
+                    ? "From " + expectedAvailable.slice(0, 10)
+                    : "Not sure"}
+                </td>
+                <td>
+                  <Link to={"/user/edit-book/" + _id}>
+                    <Button variant="warning">Edit</Button>
+                  </Link>
+                </td>
+              </tr>
+            )
+          )}
         </tbody>
       </Table>
     </div>
