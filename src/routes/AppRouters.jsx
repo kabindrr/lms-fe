@@ -36,7 +36,7 @@ export const AppRouters = () => {
           <Route path="user-list" element={<UserPage />} />
           <Route path="books" element={<Books />} />
           <Route path="new-books" element={<NewBook />} />
-          <Route path="edit-book" element={<EditBookPage />} />
+          <Route path="edit-book/:_id" element={<EditBookPage />} />
           <Route path="new-book" element={<NewBookPage />} />
           <Route path="book-landing" element={<BookLandingPage />} />
           <Route path="borrow" element={<Borrow />} />
