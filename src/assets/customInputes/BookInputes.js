@@ -22,13 +22,13 @@ export const NewBookInputes = [
     required: true,
     placeholder: " Mo Gawdat",
   },
-  {
-    label: "Image Url",
-    name: "imgUrl",
-    type: "url",
+  // {
+  //   label: "Image Url",
+  //   name: "imgUrl",
+  //   type: "url",
 
-    placeholder: "https://m.media-amazon.com/images/I/61G0x98-lbL._SY342_.jpg",
-  },
+  //   placeholder: "https://m.media-amazon.com/images/I/61G0x98-lbL._SY342_.jpg",
+  // },
   {
     label: "ISBN *",
     name: "isbn",
