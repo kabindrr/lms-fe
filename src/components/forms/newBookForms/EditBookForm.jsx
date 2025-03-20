@@ -87,13 +87,21 @@ const EditBookForm = () => {
           />
         ))}
 
-        <div className="m-3">
-          <img
-            src={import.meta.env.VITE_ROOT_URL + form?.imgUrl?.slice(6)}
-            alt="Book Image"
-            width="200px"
-            className="img-thumbnail"
-          />
+        <div className="m-3 d-flex">
+          {(form.imageList || []).map((img) => (
+            <div key={img} className="m-1">
+              <Form.Check type="radio" name="imgUrl" />
+              <Form.Label>Make Thumbnail</Form.Label>
+              <Form.Check type="checkbox" />
+              <Form.Label>Delete</Form.Label>
+              <img
+                src={import.meta.env.VITE_ROOT_URL + img?.slice(6)}
+                alt="Book Image"
+                width="200px"
+                className="img-thumbnail"
+              />
+            </div>
+          ))}
         </div>
         <Form.Group className="mb-3">
           <Form.Label>Upload More Images (Max 2 Images per Book)</Form.Label>
