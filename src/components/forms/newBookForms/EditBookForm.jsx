@@ -90,7 +90,13 @@ const EditBookForm = () => {
         <div className="m-3 d-flex">
           {(form.imageList || []).map((img) => (
             <div key={img} className="m-1">
-              <Form.Check type="radio" name="imgUrl" />
+              <Form.Check
+                type="radio"
+                name="imgUrl"
+                value={img}
+                checked={form.imgUrl === img}
+                onChange={handleOnChange}
+              />
               <Form.Label>Make Thumbnail</Form.Label>
               <Form.Check type="checkbox" />
               <Form.Label>Delete</Form.Label>
@@ -109,7 +115,6 @@ const EditBookForm = () => {
             type="file"
             name="image"
             onChange={handeOnImageSelect}
-            required
             multiple
             accept="image/*"
           />
