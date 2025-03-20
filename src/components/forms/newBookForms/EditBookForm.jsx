@@ -4,7 +4,7 @@ import { EditBookInputes } from "../../../assets/customInputes/BookInputes";
 import useForm from "../../../hooks/useForm";
 import { postNewBookAction } from "../../../features/book/bookAction";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { updateBookApi } from "../../../features/book/bookAPI";
 
@@ -14,6 +14,7 @@ const EditBookForm = () => {
   const navigate = useNavigate();
 
   const { form, setForm, handleOnChange } = useForm(initialState);
+  const [images, setImages] = useState([]);
 
   const { books } = useSelector((state) => state.bookInfo);
 
@@ -26,6 +27,16 @@ const EditBookForm = () => {
       setForm(selectedBook);
     }
   }, [setForm]);
+
+  const handeOnImageSelect = (e) => {
+    console.log(e.target.files);
+    const files = [...e.target.files];
+    if (files.length > 2) {
+      e.target.value = "";
+      return alert("Max 2 images per Book are allowed");
+    }
+    setImages([...e.target.files]);
+  };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +51,15 @@ const EditBookForm = () => {
       available,
       ...rest
     } = form;
-    const response = await updateBookApi(rest);
+
+    const formData = new FormData();
+
+    for (const key in rest) {
+      formData.append(key, rest[key]);
+    }
+    images.map((img) => formData.append("images", img));
+
+    const response = await updateBookApi(formData);
     console.log(response);
   };
 
@@ -68,6 +87,39 @@ const EditBookForm = () => {
           />
         ))}
 
+        <div className="m-3 d-flex">
+          {(form.imageList || []).map((img) => (
+            <div key={img} className="m-1">
+              <Form.Check
+                type="radio"
+                name="imgUrl"
+                value={img}
+                checked={form.imgUrl === img}
+                onChange={handleOnChange}
+              />
+              <Form.Label>Make Thumbnail</Form.Label>
+              <Form.Check type="checkbox" />
+              <Form.Label>Delete</Form.Label>
+              <img
+                src={import.meta.env.VITE_ROOT_URL + img?.slice(6)}
+                alt="Book Image"
+                width="200px"
+                className="img-thumbnail"
+              />
+            </div>
+          ))}
+        </div>
+        <Form.Group className="mb-3">
+          <Form.Label>Upload More Images (Max 2 Images per Book)</Form.Label>
+          <Form.Control
+            type="file"
+            name="image"
+            onChange={handeOnImageSelect}
+            multiple
+            accept="image/*"
+          />
+        </Form.Group>
+
         <div className="mb-2">
           <hr />
           <h4 className="text-center">Additional Info</h4>
@@ -81,7 +133,9 @@ const EditBookForm = () => {
           </div>
         </div>
         <div className="d-grid">
-          <Button type="submit">Submit Changes</Button>
+          <Button type="submit" variant="warning">
+            Update Book
+          </Button>
         </div>
       </Form>
     </div>
