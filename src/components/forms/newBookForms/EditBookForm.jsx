@@ -16,6 +16,8 @@ const EditBookForm = () => {
   const { form, setForm, handleOnChange } = useForm(initialState);
   const [images, setImages] = useState([]);
 
+  const [imageToDelete, setImageToDelete] = useState([]);
+
   const { books } = useSelector((state) => state.bookInfo);
 
   useEffect(() => {
@@ -40,6 +42,10 @@ const EditBookForm = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    if (imageToDelete.includes(form.imgUrl)) {
+      return alert("You cannot Delete the selected Thumbnail");
+    }
+
     const {
       addedBy,
       createdAt,
@@ -58,9 +64,18 @@ const EditBookForm = () => {
       formData.append(key, rest[key]);
     }
     images.map((img) => formData.append("images", img));
+    imageToDelete.map((img) => formData.append("imageToDelete", img));
 
     const response = await updateBookApi(formData);
     console.log(response);
+  };
+
+  const handleOnImageToDelete = (e) => {
+    const { checked, value } = e.target;
+
+    checked
+      ? setImageToDelete([...imageToDelete, value])
+      : setImageToDelete(imageToDelete.filter((img) => img !== value));
   };
 
   return (
@@ -96,10 +111,16 @@ const EditBookForm = () => {
                 value={img}
                 checked={form.imgUrl === img}
                 onChange={handleOnChange}
+                label={"Thumbnail"}
               />
-              <Form.Label>Make Thumbnail</Form.Label>
-              <Form.Check type="checkbox" />
-              <Form.Label>Delete</Form.Label>
+
+              <Form.Check
+                type="checkbox"
+                label="Delete"
+                value={img}
+                onChange={handleOnImageToDelete}
+              />
+
               <img
                 src={import.meta.env.VITE_ROOT_URL + img?.slice(6)}
                 alt="Book Image"
