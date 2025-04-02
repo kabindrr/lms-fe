@@ -18,3 +18,18 @@
   background: url(./assets/image5.jpg) center no-repeat;
   background-size: cover;
 }
+
+/* Carousel */
+
+.carousel {
+  height: 60vh;
+}
+.carousel img {
+  height: 60vh;
+  object-fit: cover;
+  width: 100%;
+}
+.carousel-caption-bg {
+  background-color: rgba(128, 128, 128, 0.578);
+  backdrop-filter: blur (5px);
+}

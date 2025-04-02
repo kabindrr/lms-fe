@@ -42,7 +42,7 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="d-flex w-100 justify-content-between flex-column flex-md-row">
-            <div>sd</div>
+            <div></div>
             <Form style={{ width: "40%" }}>
               <InputGroup className="">
                 <Form.Control placeholder="Search Your Book" />
