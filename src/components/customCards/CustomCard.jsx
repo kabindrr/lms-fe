@@ -12,7 +12,7 @@ export const CustomCard = ({
   return (
     <Card style={{ width: "18rem" }}>
       <div className="m-2 ">
-        <Card.Img variant="top" src={exampleImage} className="rounded" />
+        <Card.Img variant="top" src={imgUrl} className="rounded" />
       </div>
 
       <Card.Body className="text-center">
