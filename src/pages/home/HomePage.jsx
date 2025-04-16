@@ -8,7 +8,7 @@ import { RecommendationForYou } from "../../components/pageSection/Recommendatio
 export const HomePage = () => {
   return (
     <Container>
-      <Row>
+      <Row className="mb-5">
         <Col>
           {/* Hero Section */}
           <CustomCarousel />
