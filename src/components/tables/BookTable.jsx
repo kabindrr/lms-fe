@@ -60,8 +60,8 @@ export const BookTable = () => {
                 </td>
                 <td>
                   <img
-                    // src={import.meta.env.VITE_ROOT_URL + imgUrl.slice(6)}
-                    src={imgUrl}
+                    src={import.meta.env.VITE_ROOT_URL + imgUrl.slice(6)}
+                    // src={imgUrl}
                     alt=""
                     width="60px"
                   />
