@@ -26,6 +26,8 @@ export const AppRouters = () => {
 
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="book/:slug" element={<BookLandingPage />} />
+
           <Route path="signin" element={<SignInPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="forgot-password" element={<ForgetPasswordPage />} />
@@ -38,7 +40,6 @@ export const AppRouters = () => {
           <Route path="new-books" element={<NewBook />} />
           <Route path="edit-book/:_id" element={<EditBookPage />} />
           <Route path="new-book" element={<NewBookPage />} />
-          <Route path="book-landing" element={<BookLandingPage />} />
           <Route path="borrow" element={<Borrow />} />
           <Route path="profile" element={<Profile />} />
           <Route path="reviews" element={<ReviewsPage />} />

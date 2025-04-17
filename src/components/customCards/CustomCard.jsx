@@ -12,7 +12,11 @@ export const CustomCard = ({
   return (
     <Card style={{ width: "18rem" }}>
       <div className="m-2 ">
-        <Card.Img variant="top" src={imgUrl} className="rounded" />
+        <Card.Img
+          variant="top"
+          src={import.meta.env.VITE_ROOT_URL + imgUrl.slice(6)}
+          className="rounded"
+        />
       </div>
 
       <Card.Body className="text-center">
@@ -20,7 +24,7 @@ export const CustomCard = ({
         <Card.Text>
           {author} - {year}
         </Card.Text>
-        <Link to={slug}>
+        <Link to={"/book/" + slug}>
           <Button variant="dark">View Details...</Button>
         </Link>
       </Card.Body>
