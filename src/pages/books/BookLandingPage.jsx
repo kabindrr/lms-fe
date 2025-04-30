@@ -16,6 +16,8 @@ export const BookLandingPage = () => {
     // setBook(selectedBook);
     //Second Approach fetch live from server
 
+    //Second approach
+
     dispatch(fetchSinglePublicBookAction(slug));
   }, [publicBooks, dispatch, slug]);
 
