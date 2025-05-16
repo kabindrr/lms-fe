@@ -72,50 +72,56 @@ export const BookLandingPage = () => {
       )}
       {selectedBook?._id && (
         <>
-          <Row>
-            <Col>
-              <div>
+          <Row className="mt-5 ">
+            <Col md={6}>
+              <div style={{ height: "400px", overflow: "hidden" }}>
                 <img
                   src={
                     import.meta.env.VITE_ROOT_URL +
                     selectedBook?.imgUrl?.slice(6)
                   }
-                  alt=""
-                  className="img-fluid rounded shadow-sm mt-5"
-                  style={{ maxWidth: "500px", maxHeight: "400px" }}
+                  alt={selectedBook.title}
+                  className="w-100 h-100"
+                  style={{ objectFit: "cover", borderRadius: "0.5rem" }}
                 />
               </div>
             </Col>
-            <Col>
-              <div className="mt-5 d-flex flex-column justify-content-between h-70">
-                <div className="top fw-bolder">
-                  <h1>{selectedBook.title}</h1>
-                </div>
+
+            {/* Content Column */}
+            <Col md={6}>
+              <div
+                style={{
+                  height: "400px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <div>
+                  <h1>{selectedBook.title}</h1>
                   <h4>
                     {selectedBook.author} - {selectedBook.year}
                   </h4>
+                  <div className="my-3">
+                    <span>{selectedBook.genre}</span> |
+                    <span>
+                      <LiaStarSolid />
+                      <LiaStarSolid />
+                      <LiaStarSolid />
+                      <LiaStarSolid />
+                      <LiaStarSolid />
+                    </span>
+                    | <span>334 Reviews</span>
+                  </div>
+                  <div>
+                    {selectedBook.description.slice(0, 300)}... Read more
+                  </div>
                 </div>
-                <div className="my-3">
-                  <span>{selectedBook.genre}</span> |
-                  <span>
-                    {" "}
-                    <LiaStarSolid />
-                    <LiaStarSolid />
-                    <LiaStarSolid />
-                    <LiaStarSolid />
-                    <LiaStarSolid />
-                  </span>
-                  {"  "}|<span> {"  "}334 Reviews</span>
-                </div>
+
+                {/* Button at the bottom */}
                 <div>
-                  {selectedBook.description.slice(0, 300)}...... Read more
-                </div>
-                <div className="bottom">
-                  {" "}
                   <hr />
                   <div className="d-grid">
-                    {" "}
                     <Button variant="dark">Add to Borrowing List</Button>
                   </div>
                 </div>
