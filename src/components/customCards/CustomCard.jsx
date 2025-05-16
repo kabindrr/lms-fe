@@ -16,6 +16,7 @@ export const CustomCard = ({
           variant="top"
           src={import.meta.env.VITE_ROOT_URL + imgUrl.slice(6)}
           className="rounded"
+          style={{ height: "300px", objectFit: "cover", width: "100%" }}
         />
       </div>
 
