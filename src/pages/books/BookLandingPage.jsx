@@ -19,6 +19,7 @@ export const BookLandingPage = () => {
   const [book, setBook] = useState({});
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const [showUrl, setShowUrl] = useState(0);
 
   useEffect(() => {
     // First approach fetch locally
@@ -78,12 +79,27 @@ export const BookLandingPage = () => {
                 <img
                   src={
                     import.meta.env.VITE_ROOT_URL +
-                    selectedBook?.imgUrl?.slice(6)
+                    selectedBook?.imageList[showUrl].slice(6)
                   }
                   alt={selectedBook.title}
                   className="w-100 h-100"
-                  style={{ objectFit: "cover", borderRadius: "0.5rem" }}
+                  style={{ objectFit: "contain", borderRadius: "0.5rem" }}
                 />
+              </div>
+              {/* scrollable thumbnails */}
+              <div className="d-flex justify-content-center">
+                <div className="d-flex overflow-auto gap-2 m-4 py-3 ">
+                  {selectedBook.imageList?.map((url, i) => (
+                    <img
+                      src={import.meta.env.VITE_ROOT_URL + url.slice(6)}
+                      key={url}
+                      width={"100px"}
+                      className="img-thumbnail"
+                      onClick={() => setShowUrl(i)}
+                      style={{ cursor: "pointer" }}
+                    />
+                  ))}
+                </div>
               </div>
             </Col>
 
