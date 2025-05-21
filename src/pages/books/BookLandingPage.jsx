@@ -11,7 +11,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { fetchSinglePublicBookAction } from "../../features/book/bookAction";
-import { LiaStarSolid } from "react-icons/lia";
+import {
+  LiaStar,
+  LiaStarHalf,
+  LiaStarHalfAltSolid,
+  LiaStarSolid,
+} from "react-icons/lia";
+import { Star } from "../../components/star/Star";
 
 export const BookLandingPage = () => {
   const { slug } = useParams();
@@ -119,15 +125,8 @@ export const BookLandingPage = () => {
                     {selectedBook.author} - {selectedBook.year}
                   </h4>
                   <div className="my-3">
-                    <span>{selectedBook.genre}</span> |
-                    <span>
-                      <LiaStarSolid />
-                      <LiaStarSolid />
-                      <LiaStarSolid />
-                      <LiaStarSolid />
-                      <LiaStarSolid />
-                    </span>
-                    | <span>334 Reviews</span>
+                    <span>{selectedBook.genre}</span> |{" "}
+                    <Star averageRating={2}  totalReviews={55} />{" "}
                   </div>
                   <div>
                     {selectedBook.description.slice(0, 300)}... Read more
