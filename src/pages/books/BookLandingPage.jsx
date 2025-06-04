@@ -7,6 +7,8 @@ import {
   Container,
   Row,
   Spinner,
+  Tab,
+  Tabs,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -18,6 +20,7 @@ import {
   LiaStarSolid,
 } from "react-icons/lia";
 import { Star } from "../../components/star/Star";
+import { Reviews } from "../../components/reviews/Reviews";
 
 export const BookLandingPage = () => {
   const { slug } = useParams();
@@ -126,7 +129,7 @@ export const BookLandingPage = () => {
                   </h4>
                   <div className="my-3">
                     <span>{selectedBook.genre}</span> |{" "}
-                    <Star averageRating={2}  totalReviews={55} />{" "}
+                    <Star averageRating={2} totalReviews={55} />{" "}
                   </div>
                   <div>
                     {selectedBook.description.slice(0, 300)}... Read more
@@ -147,7 +150,21 @@ export const BookLandingPage = () => {
       )}
 
       <Row>
-        <Col>Bottom Section</Col>
+        <Col>
+          <h3 className="margin-auto mt-5 text-center">More Details</h3>
+          <Tabs
+            defaultActiveKey="description"
+            id="uncontrolled-tab-example"
+            className="mb-3"
+          >
+            <Tab eventKey="description" title="Description">
+              <div>{selectedBook.description}</div>
+            </Tab>
+            <Tab eventKey="reviews" title="Reviews">
+              <Reviews />
+            </Tab>
+          </Tabs>
+        </Col>
       </Row>
     </Container>
   );
