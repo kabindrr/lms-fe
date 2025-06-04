@@ -17,6 +17,7 @@ import { NewBookPage } from "../pages/books/NewBookPage";
 import { BookLandingPage } from "../pages/books/BookLandingPage";
 import { VerifyUser } from "../pages/auth/VerifyUser";
 import { NewBook } from "../pages/books/NewBook";
+import AllBooks from "../pages/books/AllBooks";
 
 export const AppRouters = () => {
   return (
@@ -26,6 +27,7 @@ export const AppRouters = () => {
 
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="all-books" element={<AllBooks />} />
           <Route path="book/:slug" element={<BookLandingPage />} />
 
           <Route path="signin" element={<SignInPage />} />
