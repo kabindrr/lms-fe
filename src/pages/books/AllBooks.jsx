@@ -1,9 +1,18 @@
 import React from "react";
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import {
+  Breadcrumb,
+  Button,
+  ButtonGroup,
+  Col,
+  Container,
+  Row,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { CustomCard } from "../../components/customCards/CustomCard";
 import { Pagination } from "react-bootstrap";
+import { useSelector } from "react-redux";
 const AllBooks = () => {
+  const { publicBooks } = useSelector((state) => state.bookInfo);
   return (
     <Container>
       <Row className="mt-3">
@@ -20,15 +29,22 @@ const AllBooks = () => {
       </Row>
       <Row>
         <Col>
-          <div>100 Books Found</div>
+          <div className="d-flex justify-content-between">
+            <div>100 Books Found</div>
+            <div>
+              {" "}
+              <ButtonGroup aria-label="Basic example">
+                <Button variant="secondary">Card</Button>
+                <Button variant="dark">List</Button>
+              </ButtonGroup>
+            </div>
+          </div>
+          <div></div>
           <div className="bookList-Container d-flex gap-3 flex-wrap justify-content-center m-3">
-            <CustomCard />
-            <CustomCard />
-            <CustomCard />
-            <CustomCard />
-            <CustomCard />
-            <CustomCard />
-            <CustomCard />
+            {publicBooks.length > 0 &&
+              publicBooks.map((book) => (
+                <CustomCard key={book._id} {...book} />
+              ))}
           </div>
           <div className="pagination">todo pagination</div>
         </Col>
