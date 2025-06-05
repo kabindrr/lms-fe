@@ -13,6 +13,7 @@ import { logoutUserApi } from "../services/authApi";
 import { setUser } from "../features/user/userSlice";
 import { Form, InputGroup } from "react-bootstrap";
 import { SlMagnifier } from "react-icons/sl";
+import { ImBooks } from "react-icons/im";
 
 const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
@@ -54,6 +55,9 @@ const Header = () => {
             <Nav className="">
               <Link className="nav-link" to="/">
                 <MdAddHomeWork /> Home
+              </Link>
+              <Link className="nav-link" to="/all-books">
+                <ImBooks /> Books
               </Link>
 
               {user?._id ? (
