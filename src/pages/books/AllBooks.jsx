@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Breadcrumb,
   Button,
@@ -8,10 +8,14 @@ import {
   Row,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { CustomCard } from "../../components/customCards/CustomCard";
+import {
+  CustomCard,
+  CustomListCard,
+} from "../../components/customCards/CustomCard";
 import { Pagination } from "react-bootstrap";
 import { useSelector } from "react-redux";
 const AllBooks = () => {
+  const [view, setView] = useState("card");
   const { publicBooks } = useSelector((state) => state.bookInfo);
   return (
     <Container>
@@ -34,17 +38,26 @@ const AllBooks = () => {
             <div>
               {" "}
               <ButtonGroup aria-label="Basic example">
-                <Button variant="secondary">Card</Button>
-                <Button variant="dark">List</Button>
+                <Button onClick={() => setView("card")} variant="secondary">
+                  Card
+                </Button>
+                <Button onClick={() => setView("list")} variant="dark">
+                  List
+                </Button>
               </ButtonGroup>
             </div>
           </div>
           <div></div>
+          <hr />
           <div className="bookList-Container d-flex gap-3 flex-wrap justify-content-center m-3">
             {publicBooks.length > 0 &&
-              publicBooks.map((book) => (
-                <CustomCard key={book._id} {...book} />
-              ))}
+              publicBooks.map((book) =>
+                view === "card" ? (
+                  <CustomCard key={book._id} {...book} />
+                ) : (
+                  <CustomListCard key={book._id} {...book} />
+                )
+              )}
           </div>
           <div className="pagination">todo pagination</div>
         </Col>

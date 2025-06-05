@@ -48,3 +48,42 @@
   border-radius: 50%;
   border: 2px solid gray;
 }
+
+/* Book card view css */
+.card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.content {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+}
+
+.image {
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.body {
+  flex: 1;
+}
+
+.link {
+  display: grid;
+  margin-top: 1rem;
+}
