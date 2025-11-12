@@ -14,9 +14,10 @@ import {
 } from "../../components/customCards/CustomCard";
 import { Pagination } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { current } from "@reduxjs/toolkit";
 
-const booksPerScreen = 5;
+import { CustomPagination } from "../../components/customPagination/CustomPagination";
+
+const booksPerScreen = 6;
 const AllBooks = () => {
   const [view, setView] = useState("card");
   const [active, setActive] = useState(1);
@@ -29,18 +30,6 @@ const AllBooks = () => {
   const endIndex = startIndex + booksPerScreen;
   const displayBooks = publicBooks.slice(startIndex, endIndex);
 
-  let items = [];
-  for (let number = 1; number <= pages; number++) {
-    items.push(
-      <Pagination.Item
-        key={number}
-        active={number === active}
-        onClick={() => setActive(number)}
-      >
-        {number}
-      </Pagination.Item>
-    );
-  }
   return (
     <Container>
       <Row className="mt-3">
@@ -83,9 +72,11 @@ const AllBooks = () => {
                 )
               )}
           </div>
-          <div className="mt-3 d-flex justify-content-center">
-            <Pagination>{items}</Pagination>
-          </div>
+          <CustomPagination
+            active={active}
+            setActive={setActive}
+            pages={pages}
+          />
         </Col>
       </Row>
     </Container>
