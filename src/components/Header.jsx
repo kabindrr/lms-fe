@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import LOGO from "../assets/lms.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdAddHomeWork } from "react-icons/md";
 import { RiLoginBoxFill } from "react-icons/ri";
 import { FaUserPlus } from "react-icons/fa";
@@ -14,10 +14,14 @@ import { setUser } from "../features/user/userSlice";
 import { Form, InputGroup } from "react-bootstrap";
 import { SlMagnifier } from "react-icons/sl";
 import { ImBooks } from "react-icons/im";
+import { useRef } from "react";
 
 const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+
+  const searchRef = useRef("");
+  const navigate = useNavigate();
 
   const handleOnLogout = () => {
     //call api to logout from backend
@@ -30,6 +34,13 @@ const Header = () => {
     dispatch(setUser({}));
   };
 
+  const handleOnSearch = (e) => {
+    e.preventDefault();
+    console.log(searchRef.current.value);
+    const str = searchRef.current.value;
+    navigate("/all-books?s=" + str);
+  };
+
   return (
     <Navbar expand="lg" className="bg-dark" variant="dark">
       <Container>
@@ -40,14 +51,19 @@ const Header = () => {
             style={{ width: "120px", height: "120px" }}
           />
         </Link>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="d-flex w-100 justify-content-between flex-column flex-md-row">
             <div></div>
-            <Form style={{ width: "40%" }}>
+            <Form style={{ width: "40%" }} onSubmit={handleOnSearch}>
               <InputGroup className="">
-                <Form.Control placeholder="Search Your Book" />
-                <InputGroup.Text id="basic-addon2">
+                <Form.Control
+                  placeholder="Search Your Book"
+                  name="s"
+                  ref={searchRef}
+                />
+                <InputGroup.Text id="basic-addon2" as="button">
                   <SlMagnifier />
                 </InputGroup.Text>
               </InputGroup>
