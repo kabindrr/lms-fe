@@ -38,7 +38,7 @@ const Header = () => {
     e.preventDefault();
     console.log(searchRef.current.value);
     const str = searchRef.current.value;
-    navigate("/all-books?s=" + str);
+    str && navigate("/search?query=" + str);
   };
 
   return (
